@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prep Roulette — Agentic AI Interview</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
+<style>
+:root{--bg:#050912;--card:#0a1224;--card2:#0e1830;--line:#16264a;--txt:#eaf1ff;--mute:#7f93bd;--blue:#2f7bff;--cyan:#22d3ff;--glow:rgba(47,123,255,.35);--ok:#2ee6a6;--warn:#ffb84d}
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100%}
+body{background:radial-gradient(900px 400px at 50% -100px,rgba(47,123,255,.18),transparent),var(--bg)}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 20px 60px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;gap:14px;align-items:center}
+.logo{width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#1d4fd8,#22d3ff);display:grid;place-items:center;font-size:28px;box-shadow:0 0 24px var(--glow)}
+h1{font-size:32px;font-weight:800;letter-spacing:-.5px}h1 span{color:var(--cyan)}
+.sub{color:var(--mute);font-size:15px}
+.btn{font:inherit;color:var(--txt);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 22px;font-weight:700;cursor:pointer;transition:.18s}
+.btn:hover{border-color:var(--blue);box-shadow:0 0 18px var(--glow)}
+.btn.sm{padding:12px 20px;font-weight:600}
+.btn.primary{background:linear-gradient(135deg,#1f5cf0,#22b8ff);border-color:transparent;box-shadow:0 6px 26px var(--glow)}
+.btn.primary:hover{filter:brightness(1.12)}
+.card{margin-top:22px;background:linear-gradient(180deg,var(--card),#080f1f);border:1px solid var(--line);border-radius:28px;padding:30px 34px;min-height:340px;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(47,123,255,.05),0 20px 60px rgba(0,0,0,.5)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tag{background:#10224f;color:#9dbdff;border:1px solid #1c3a7d;border-radius:12px;padding:10px 18px;font-weight:700;font-size:15px}
+.tag.cat{background:transparent;font-weight:600;font-size:13px;padding:6px 12px}
+.count{color:var(--mute);font-weight:700;font-size:18px}
+.q{flex:1;display:grid;place-items:center;text-align:center;font-size:clamp(22px,3.4vw,34px);font-weight:800;line-height:1.35;padding:26px 6px;transition:opacity .15s}
+.q.roll{opacity:.55;filter:blur(1px)}
+.actions{display:flex;gap:14px;justify-content:center;margin:26px 0;flex-wrap:wrap}
+.reveal{display:none;margin-top:18px;border-top:1px dashed var(--line);padding-top:18px;text-align:left}
+.reveal.on{display:block;animation:up .3s}
+@keyframes up{from{opacity:0;transform:translateY(8px)}}
+.reveal h3{font-size:13px;letter-spacing:.12em;color:var(--cyan);margin:14px 0 8px}
+.reveal h3:first-child{margin-top:0}
+.pills{display:flex;gap:8px;flex-wrap:wrap}
+.term{background:#0c1a38;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:15px;line-height:1.45}
+.term b{color:#8fb8ff}
+.none{color:var(--mute);font-size:15px}
+.mark{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.mark .btn{padding:10px 16px;font-size:14px}
+.mark .btn.ok.on{background:rgba(46,230,166,.15);border-color:var(--ok);color:var(--ok)}
+.mark .btn.rv.on{background:rgba(255,184,77,.15);border-color:var(--warn);color:var(--warn)}
+.or{display:flex;align-items:center;gap:16px;color:var(--mute);margin:6px 0 20px}
+.or:before,.or:after{content:"";flex:1;height:1px;background:var(--line)}
+.center{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.timer{font-variant-numeric:tabular-nums}
+.timer.warn{color:var(--warn);border-color:var(--warn)}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:34px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:13px;color:#b7c6e6;cursor:pointer;text-align:left;font-family:inherit}
+.chip.off{opacity:.38}
+.chip small{display:block;color:var(--mute);margin-top:4px}
+.bar{height:5px;border-radius:5px;background:#12204a;margin-top:9px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .4s}
+.sdft{margin-top:26px;border:1px solid var(--line);border-radius:18px;padding:16px 20px;background:var(--card)}
+.sdft summary{cursor:pointer;font-weight:700;color:var(--cyan)}
+.sdft p{margin-top:10px;color:#b7c6e6;font-size:14px;line-height:1.5}
+.modal{position:fixed;inset:0;background:rgba(2,5,12,.8);backdrop-filter:blur(6px);display:none;place-items:center;padding:20px;z-index:9}
+.modal.on{display:grid}
+.panel{width:min(760px,100%);max-height:86vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px}
+.panel h2{font-size:22px;margin-bottom:14px}
+input[type=search]{width:100%;background:#070d1c;border:1px solid var(--line);color:var(--txt);border-radius:12px;padding:12px 14px;font:inherit;margin-bottom:12px}
+.acc{background:var(--card2);border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden}
+.acc>button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;background:none;border:0;color:var(--txt);font:inherit;font-weight:800;font-size:17px;padding:16px 18px;cursor:pointer;text-align:left}
+.acc>button:hover{background:#0f1d3d}
+.acc .meta{color:var(--mute);font-weight:700;font-size:14px;display:flex;gap:10px;align-items:center}
+.acc .body{display:none;padding:4px 10px 12px;border-top:1px solid var(--line)}
+.acc.open .body{display:block}
+.acc.open .car{transform:rotate(90deg)}
+.car{transition:.2s;display:inline-block}
+.li{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px;cursor:pointer;border:1px solid transparent;line-height:1.5}
+.li>div{flex:1;min-width:0}
+.li:hover{background:var(--card2);border-color:var(--line)}
+.li .n{color:var(--mute);min-width:26px;font-weight:700}
+.li .t{font-size:12px;color:var(--cyan);margin-top:4px;font-weight:600}
+.dot{width:9px;height:9px;border-radius:50%;margin-top:7px;flex:none;background:#1b2b57}
+.dot.ok{background:var(--ok)}.dot.rv{background:var(--warn)}
+label.s{display:flex;gap:10px;align-items:center;padding:8px 0;font-size:15px}
+input[type=checkbox]{accent-color:var(--blue);width:18px;height:18px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#10224f;border:1px solid var(--blue);padding:12px 20px;border-radius:12px;display:none;z-index:10}
+@media(max-width:600px){.card{padding:22px 18px}h1{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand"><div class="logo">🎲</div><div><h1>Prep <span>Roulette</span></h1><div class="sub">One prompt at a time. Answer it out loud in the SDFT format.</div></div></div>
+  <div class="center"><button class="btn sm" id="bAll">☰ All Questions</button><button class="btn sm" id="bSet">⚙ Settings</button></div>
+</header>
+
+<section class="card">
+  <div class="row"><span class="tag">Question</span><span class="count" id="count">– / 50</span></div>
+  <div class="q" id="q">Hit “Pick Question” to spin the roulette.</div>
+  <div class="reveal" id="rev"></div>
+</section>
+
+<div class="actions">
+  <button class="btn primary" id="bPick">🎲 Pick Question</button>
+  <button class="btn" id="bRev">👁 Reveal Key Points</button>
+  <button class="btn timer" id="bTimer">⏱ 2:00</button>
+</div>
+
+<div class="or">or</div>
+<div class="center"><button class="btn sm" id="bAll2">☰ View All Questions</button></div>
+
+<div class="chips" id="chips"></div>
+
+<details class="sdft"><summary>SDFT answer framework</summary><div id="fw"></div></details>
+</div>
+
+<div class="modal" id="mAll"><div class="panel"><div class="row"><h2>All Questions</h2><button class="btn sm" data-close>✕</button></div><input type="search" id="search" placeholder="Search questions or topics…"><div id="list"></div></div></div>
+<div class="modal" id="mSet"><div class="panel"><div class="row"><h2>Settings</h2><button class="btn sm" data-close>✕</button></div>
+  <label class="s"><input type="checkbox" id="noRep"> Don’t repeat questions until all are seen</label>
+  <label class="s"><input type="checkbox" id="skipOk"> Skip questions I marked “Nailed it”</label>
+  <h3 style="margin:16px 0 4px;font-size:14px;color:var(--cyan);letter-spacing:.1em">TOPICS IN THE WHEEL</h3><div id="topicSet"></div>
+  <div style="margin-top:18px;display:flex;gap:10px"><button class="btn sm" id="bResetSeen">Reset seen</button><button class="btn sm" id="bResetAll">Reset all progress</button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const DATA=[{"id": 1, "cat": "Polish", "topic": "Multi-Agent Architecture", "q": "Articulate orchestrator-to-sub-agent routing using a concrete example (e.g., travel planner) end-to-end", "terms": [["Planner", "Decomposes goal into subtasks, decides next action. No execution side-effects."], ["Executor", "Calls tools/APIs, returns structured result. Stateless between calls."]], "sdft": null}, {"id": 2, "cat": "Polish", "topic": "Multi-Agent Architecture", "q": "Name role-based components precisely: retriever, analytical agent, orchestrator — and what each returns", "terms": [["Planner", "Decomposes goal into subtasks, decides next action. No execution side-effects."], ["Executor", "Calls tools/APIs, returns structured result. Stateless between calls."], ["Memory", "Only component allowed to persist state. Split into short-term and long-term."]], "sdft": null}, {"id": 3, "cat": "Polish", "topic": "Multi-Agent Architecture", "q": "Explain budget-based filtering / decisioning as a concrete rule, not just a concept", "terms": [["Policy-driven routing", "Route by task type, context window need, cost ceiling, latency SLA — not ad hoc."]], "sdft": null}, {"id": 4, "cat": "Learn", "topic": "Multi-Agent Architecture", "q": "Define Planner vs Executor vs Memory as three distinct components with explicit responsibilities", "terms": [["Planner", "Decomposes goal into subtasks, decides next action. No execution side-effects."], ["Executor", "Calls tools/APIs, returns structured result. Stateless between calls."], ["Memory", "Only component allowed to persist state. Split into short-term and long-term."]], "sdft": null}, {"id": 5, "cat": "Learn", "topic": "Multi-Agent Architecture", "q": "Specify the interface/contract between planner and executor (e.g., structured action object: agent, task, params)", "terms": [["Planner", "Decomposes goal into subtasks, decides next action. No execution side-effects."], ["Executor", "Calls tools/APIs, returns structured result. Stateless between calls."]], "sdft": null}, {"id": 6, "cat": "Learn", "topic": "Multi-Agent Architecture", "q": "Define short-term memory mechanism (e.g., session buffer, Redis with TTL) and what it stores", "terms": [["Short-term memory", "Conversation buffer / scratchpad / current plan state. Often Redis with TTL."]], "sdft": null}, {"id": 7, "cat": "Learn", "topic": "Multi-Agent Architecture", "q": "Define long-term memory mechanism (e.g., vector store of persistent facts) and how/when agents write to it", "terms": [["Long-term memory", "Vector store or DB for facts that outlive a session (e.g. user preferences)."]], "sdft": null}, {"id": 8, "cat": "Learn", "topic": "Multi-Agent Architecture", "q": "Explain sync orchestration pattern: when it's used, and its latency-stacking downside", "terms": [["Sync orchestration", "Orchestrator blocks waiting on sub-agent. Simple, but latency stacks linearly."]], "sdft": null}, {"id": 9, "cat": "Learn", "topic": "Multi-Agent Architecture", "q": "Explain async orchestration pattern: when it's used (unpredictable sub-agent latency), and how callback/event resumption works", "terms": [["Async orchestration", "Fire-and-forget via queue/event bus; resumes on callback. Needed for unpredictable (LLM) latency."]], "sdft": null}, {"id": 10, "cat": "Learn", "topic": "Multi-Agent Architecture", "q": "Describe failure modes for a sub-agent call and how the orchestrator detects them", "terms": [["Circuit breaker", "Stops retrying a consistently failing sub-agent instead of looping forever."], ["Trace IDs", "Attach a trace ID per agent invocation to reconstruct a multi-agent call chain in logs."]], "sdft": null}, {"id": 11, "cat": "Learn", "topic": "Multi-Agent Architecture", "q": "Define retry semantics: idempotency keys, max-retry count, fallback-to-default-plan behavior", "terms": [["Idempotency key", "Unique ID per task so retries don't double-execute a side-effecting action."], ["Dead-letter queue", "Holds tasks that fail repeatedly, for inspection instead of endless retry."], ["Circuit breaker", "Stops retrying a consistently failing sub-agent instead of looping forever."]], "sdft": null}, {"id": 12, "cat": "Polish", "topic": "Google ADK / Agent Frameworks", "q": "Explain the orchestrator-invokes-specialized-agents pattern with a concrete task split example", "terms": [["Cost", "Multi-agent lets you assign cheap models to simple tasks, frontier models to hard reasoning."], ["Task complexity", "Low complexity = single agent is simpler and sufficient. High + divisible = multi-agent."]], "sdft": null}, {"id": 13, "cat": "Polish", "topic": "Google ADK / Agent Frameworks", "q": "Justify cost/model heterogeneity: cheap model for simple tasks, strong model for analytical/reasoning tasks", "terms": [["Cost", "Multi-agent lets you assign cheap models to simple tasks, frontier models to hard reasoning."]], "sdft": null}, {"id": 14, "cat": "Polish", "topic": "Google ADK / Agent Frameworks", "q": "Explain why specialized agents improve scalability and reduce latency vs a monolithic agent", "terms": [["Latency", "Single agent wins (no hop overhead) unless sub-tasks can run in parallel."], ["Fault isolation", "Multi-agent wins — one agent's crash doesn't take down the whole system."]], "sdft": null}, {"id": 15, "cat": "Learn", "topic": "Google ADK / Agent Frameworks", "q": "Build a single-vs-multi-agent decision matrix: fault isolation, latency, consistency, cost, task complexity", "terms": [["Latency", "Single agent wins (no hop overhead) unless sub-tasks can run in parallel."], ["Fault isolation", "Multi-agent wins — one agent's crash doesn't take down the whole system."], ["Consistency", "Single agent easier to keep consistent; multi-agent needs explicit state sync."], ["Cost", "Multi-agent lets you assign cheap models to simple tasks, frontier models to hard reasoning."], ["Task complexity", "Low complexity = single agent is simpler and sufficient. High + divisible = multi-agent."]], "sdft": null}, {"id": 16, "cat": "Learn", "topic": "Google ADK / Agent Frameworks", "q": "State explicit criteria for choosing multi-agent (parallelizable subtasks, divisible complexity, isolation needs)", "terms": [["Latency", "Single agent wins (no hop overhead) unless sub-tasks can run in parallel."], ["Task complexity", "Low complexity = single agent is simpler and sufficient. High + divisible = multi-agent."]], "sdft": null}, {"id": 17, "cat": "Learn", "topic": "Google ADK / Agent Frameworks", "q": "Describe concrete fault isolation strategy: bulkhead pattern, separate resource pools per agent", "terms": [["Bulkhead pattern", "Separate thread/connection pools per agent so one agent can't exhaust shared resources."], ["Fault isolation", "Multi-agent wins — one agent's crash doesn't take down the whole system."]], "sdft": null}, {"id": 18, "cat": "Learn", "topic": "Google ADK / Agent Frameworks", "q": "Describe concrete monitoring strategy: per-agent health checks, trace IDs, dead-letter queues for repeated failures", "terms": [["Trace IDs", "Attach a trace ID per agent invocation to reconstruct a multi-agent call chain in logs."], ["Dead-letter queue", "Holds tasks that fail repeatedly, for inspection instead of endless retry."]], "sdft": null}, {"id": 19, "cat": "Learn", "topic": "Google ADK / Agent Frameworks", "q": "Design a dynamic policy: adjust planning depth based on measured latency/cost budget per session", "terms": [["Cost", "Multi-agent lets you assign cheap models to simple tasks, frontier models to hard reasoning."], ["Latency", "Single agent wins (no hop overhead) unless sub-tasks can run in parallel."]], "sdft": null}, {"id": 20, "cat": "Learn", "topic": "Google ADK / Agent Frameworks", "q": "Design a dynamic policy: adjust tool-call frequency / model routing based on a task-complexity score", "terms": [["Cost", "Multi-agent lets you assign cheap models to simple tasks, frontier models to hard reasoning."], ["Task complexity", "Low complexity = single agent is simpler and sufficient. High + divisible = multi-agent."]], "sdft": null}, {"id": 21, "cat": "Polish", "topic": "FastAPI Backend & Async", "q": "Explain moving long-running work to background workers / message queues with async endpoints", "terms": [["Async orchestration", "Fire-and-forget via queue/event bus; resumes on callback. Needed for unpredictable (LLM) latency."], ["Worker types", "Separate CPU-bound vs I/O-bound worker pools so one doesn't starve the other."]], "sdft": null}, {"id": 22, "cat": "Polish", "topic": "FastAPI Backend & Async", "q": "Explain blue-green deployment as a zero-downtime migration strategy with a concrete switch-over example", "terms": [], "sdft": null}, {"id": 23, "cat": "Polish", "topic": "FastAPI Backend & Async", "q": "Explain orchestrator routing requests to different agents/models based on task requirements", "terms": [["Policy-driven routing", "Route by task type, context window need, cost ceiling, latency SLA — not ad hoc."]], "sdft": null}, {"id": 24, "cat": "Learn", "topic": "FastAPI Backend & Async", "q": "Detail queue architecture: CPU-bound vs I/O-bound worker types, and why they're separated", "terms": [["Worker types", "Separate CPU-bound vs I/O-bound worker pools so one doesn't starve the other."]], "sdft": null}, {"id": 25, "cat": "Learn", "topic": "FastAPI Backend & Async", "q": "Define visibility timeout and explain how a wrong value causes duplicate processing", "terms": [["Visibility timeout", "How long a queue message is hidden from other consumers after being picked up. Must exceed expected processing time or you get duplicate processing."]], "sdft": null}, {"id": 26, "cat": "Learn", "topic": "FastAPI Backend & Async", "q": "Define idempotency keys and explain how they make retries safe for side-effecting tasks", "terms": [["Idempotency key", "Unique ID per task so retries don't double-execute a side-effecting action."]], "sdft": null}, {"id": 27, "cat": "Learn", "topic": "FastAPI Backend & Async", "q": "Design a policy-driven routing layer: explicit criteria (task type, context window, cost ceiling, latency SLA)", "terms": [["Policy-driven routing", "Route by task type, context window need, cost ceiling, latency SLA — not ad hoc."]], "sdft": null}, {"id": 28, "cat": "Learn", "topic": "FastAPI Backend & Async", "q": "Define fallback behavior: circuit breaker pattern for a failing provider, secondary fallback model", "terms": [["Fallback / circuit breaker", "If primary provider times out repeatedly, stop hitting it and switch to secondary."], ["Circuit breaker", "Stops retrying a consistently failing sub-agent instead of looping forever."]], "sdft": null}, {"id": 29, "cat": "Learn", "topic": "FastAPI Backend & Async", "q": "Compare webhook vs polling callback handling: latency, reliability, and verification needs for each", "terms": [["Webhook", "Push-based callback. Lower latency; must verify signatures, handle out-of-order delivery."], ["Polling", "Pull-based callback. Simpler; use exponential backoff to avoid wasting resources."]], "sdft": null}, {"id": 30, "cat": "Learn", "topic": "FastAPI Backend & Async", "q": "Define retry policy with exponential backoff for polling-based callbacks", "terms": [["Polling", "Pull-based callback. Simpler; use exponential backoff to avoid wasting resources."]], "sdft": null}, {"id": 31, "cat": "Learn", "topic": "FastAPI Backend & Async", "q": "Design a state reconciliation job for stuck/pending tasks (periodic re-check against source of truth)", "terms": [["State reconciliation", "Periodic job that re-checks 'stuck' tasks (e.g. PENDING > N min) against source of truth."]], "sdft": null}, {"id": 32, "cat": "Polish", "topic": "RAG Pipelines & Vector DB", "q": "Explain embeddings + vector DB for semantic search/retrieval with a concrete query example", "terms": [["Cosine similarity", "Magnitude-invariant; most common default for semantic similarity."], ["top-k", "Number of chunks retrieved per query — typically 3 to 10. State your number and why."]], "sdft": null}, {"id": 33, "cat": "Polish", "topic": "RAG Pipelines & Vector DB", "q": "Explain re-ingestion, chunking, embedding refresh as the fix for outdated answers", "terms": [["Versioned embeddings", "Tag chunks with doc version/hash so stale ones can be identified and purged."], ["Trigger-based re-indexing", "Re-index on a document-update event rather than only on a fixed cron schedule."]], "sdft": null}, {"id": 34, "cat": "Polish", "topic": "RAG Pipelines & Vector DB", "q": "Explain combining retrieved context with the user query before sending to the LLM (prompt construction)", "terms": [["top-k", "Number of chunks retrieved per query — typically 3 to 10. State your number and why."], ["Score threshold", "Minimum similarity score to keep a retrieved chunk; discards irrelevant matches."]], "sdft": null}, {"id": 35, "cat": "Learn", "topic": "RAG Pipelines & Vector DB", "q": "State embedding model selection criteria: dimensionality vs latency, domain fit vs general-purpose", "terms": [["Cosine similarity", "Magnitude-invariant; most common default for semantic similarity."], ["Dot product", "Faster than cosine; valid when vectors are pre-normalized."]], "sdft": null}, {"id": 36, "cat": "Learn", "topic": "RAG Pipelines & Vector DB", "q": "Compare distance metrics: cosine similarity vs dot product vs Euclidean/L2, and when each applies", "terms": [["Cosine similarity", "Magnitude-invariant; most common default for semantic similarity."], ["Dot product", "Faster than cosine; valid when vectors are pre-normalized."], ["Euclidean / L2", "Sensitive to magnitude; less common for normalized text embeddings."]], "sdft": null}, {"id": 37, "cat": "Learn", "topic": "RAG Pipelines & Vector DB", "q": "Compare chunking strategies: fixed-size+overlap vs semantic/recursive vs sentence-window retrieval", "terms": [["Fixed-size chunking", "Simple baseline: fixed token/char length with overlap."], ["Semantic / recursive chunking", "Splits on structure (headers, paragraphs) — better context preservation."], ["Sentence-window retrieval", "Small chunk used for matching; larger surrounding window returned for context."]], "sdft": null}, {"id": 38, "cat": "Learn", "topic": "RAG Pipelines & Vector DB", "q": "Explain the chunk-size tradeoff: too small loses context, too large dilutes relevance", "terms": [["Fixed-size chunking", "Simple baseline: fixed token/char length with overlap."], ["Sentence-window retrieval", "Small chunk used for matching; larger surrounding window returned for context."]], "sdft": null}, {"id": 39, "cat": "Learn", "topic": "RAG Pipelines & Vector DB", "q": "Define retrieval tuning parameters: top-k value and score threshold, with reasoning for chosen numbers", "terms": [["top-k", "Number of chunks retrieved per query — typically 3 to 10. State your number and why."], ["Score threshold", "Minimum similarity score to keep a retrieved chunk; discards irrelevant matches."]], "sdft": null}, {"id": 40, "cat": "Learn", "topic": "RAG Pipelines & Vector DB", "q": "Explain re-ranking with a cross-encoder as a second-stage refinement of top-k results", "terms": [["Re-ranking", "Second-stage cross-encoder re-scores top-k before sending to the LLM."]], "sdft": null}, {"id": 41, "cat": "Learn", "topic": "RAG Pipelines & Vector DB", "q": "Design an ingestion freshness policy: versioned embeddings (doc hash/version tagging) for stale-chunk detection", "terms": [["Versioned embeddings", "Tag chunks with doc version/hash so stale ones can be identified and purged."]], "sdft": null}, {"id": 42, "cat": "Learn", "topic": "RAG Pipelines & Vector DB", "q": "Design trigger-based re-indexing (on document update event) vs cron-based batch re-indexing", "terms": [["Trigger-based re-indexing", "Re-index on a document-update event rather than only on a fixed cron schedule."]], "sdft": null}, {"id": 43, "cat": "Learn", "topic": "RAG Pipelines & Vector DB", "q": "Explain using RAGAS to measure retrieval quality after a chunking/top-k change (closing the feedback loop)", "terms": [["RAGAS", "Framework to measure retrieval/answer quality — use to validate a chunking or top-k change."]], "sdft": null}, {"id": 44, "cat": "Learn", "topic": "Answer Structure (SDFT)", "q": "Practice stating architecture in 10-15 sec: name components and roles only, no detail yet", "terms": [], "sdft": "1. State — Architecture in 10-15 sec. Name components + roles only. e.g. 'Planner-executor split with shared memory, coordinated by an orchestrator.'"}, {"id": 45, "cat": "Learn", "topic": "Answer Structure (SDFT)", "q": "Practice defining interfaces/contracts in 30-45 sec immediately after architecture (this is the most-skipped step)", "terms": [], "sdft": "2. Define — Interfaces/contracts in 30-45 sec. Most-skipped step — go here immediately. e.g. 'Planner emits {agent, task, params}; executor returns {status, data, error}.'"}, {"id": 46, "cat": "Learn", "topic": "Answer Structure (SDFT)", "q": "Practice volunteering failure modes & edge cases in 30-45 sec without being asked", "terms": [], "sdft": "3. Failure — Modes & edge cases in 30-45 sec, volunteered without being asked. e.g. 'Idempotency keys on every call; 3 failed retries -> fallback to default plan.'"}, {"id": 47, "cat": "Learn", "topic": "Answer Structure (SDFT)", "q": "Practice stating tradeoffs/alternatives considered in 15-30 sec to close the answer", "terms": [], "sdft": "4. Tradeoffs — Why this over alternatives, 15-30 sec. e.g. 'Chose async over sync because LLM-backed sub-agent latency is unpredictable.'"}, {"id": 48, "cat": "Learn", "topic": "Answer Structure (SDFT)", "q": "Time a full SDFT answer end-to-end and keep it under ~2 minutes", "terms": [], "sdft": "Full run: State (10-15s) → Define (30-45s) → Failure (30-45s) → Tradeoffs (15-30s). Total under ~2 min."}, {"id": 49, "cat": "Learn", "topic": "Answer Structure (SDFT)", "q": "For virtual/recorded interviews: state your structure out loud first ('I'll cover architecture, then interfaces...')", "terms": [], "sdft": "1. State — Architecture in 10-15 sec. Name components + roles only. e.g. 'Planner-executor split with shared memory, coordinated by an orchestrator.'"}, {"id": 50, "cat": "Learn", "topic": "Answer Structure (SDFT)", "q": "Replace vague nouns with concrete numbers/names in every answer (e.g., 'Redis w/ 10-min TTL' not 'a cache')", "terms": [], "sdft": "Say 'Redis with a 10-min TTL', not 'a cache'. Numbers and names make answers sound lived-in."}];
+const FW={"1. State": "Architecture in 10-15 sec. Name components + roles only. e.g. 'Planner-executor split with shared memory, coordinated by an orchestrator.'", "2. Define": "Interfaces/contracts in 30-45 sec. Most-skipped step — go here immediately. e.g. 'Planner emits {agent, task, params}; executor returns {status, data, error}.'", "3. Failure": "Modes & edge cases in 30-45 sec, volunteered without being asked. e.g. 'Idempotency keys on every call; 3 failed retries -> fallback to default plan.'", "4. Tradeoffs": "Why this over alternatives, 15-30 sec. e.g. 'Chose async over sync because LLM-backed sub-agent latency is unpredictable.'"};
+const $=s=>document.querySelector(s);
+const KEY='prepRoulette.v1';
+let st={seen:[],marks:{},off:[],noRep:true,skipOk:false};
+try{Object.assign(st,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+let cur=null,rolling=false;
+const topics=[...new Set(DATA.map(d=>d.topic))];
+
+function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',2200)}
+function pool(){
+  let p=DATA.filter(d=>!st.off.includes(d.topic));
+  if(st.skipOk)p=p.filter(d=>st.marks[d.id]!=='ok');
+  return p;
+}
+function show(d){
+  cur=d;$('#q').textContent=d.q;$('#count').textContent=d.id+' / '+DATA.length;
+  $('#rev').classList.remove('on');renderRev();
+}
+function pick(){
+  if(rolling)return;
+  let p=pool();
+  if(!p.length){toast('No questions left — adjust settings');return}
+  if(st.noRep){
+    let fresh=p.filter(d=>!st.seen.includes(d.id));
+    if(!fresh.length){st.seen=[];fresh=p;toast('All seen — wheel reset 🔄')}
+    p=fresh;
+  }
+  if(cur&&p.length>1)p=p.filter(d=>d.id!==cur.id);
+  const target=p[Math.floor(Math.random()*p.length)];
+  rolling=true;const q=$('#q');q.classList.add('roll');
+  let n=0;const iv=setInterval(()=>{
+    const r=DATA[Math.floor(Math.random()*DATA.length)];
+    q.textContent=r.q;$('#count').textContent=r.id+' / '+DATA.length;
+    if(++n>=12){clearInterval(iv);q.classList.remove('roll');rolling=false;
+      show(target);if(!st.seen.includes(target.id))st.seen.push(target.id);save();renderChips()}
+  },55);
+}
+function renderRev(){
+  if(!cur)return;
+  const r=$('#rev');r.innerHTML='';
+  const add=(h,node)=>{const e=document.createElement('h3');e.textContent=h;r.append(e,node)};
+  const pills=document.createElement('div');pills.className='pills';
+  [cur.topic,cur.cat==='Polish'?'Polish — you know it, sharpen it':'Learn — gap to close'].forEach((t,i)=>{const s=document.createElement('span');s.className='tag cat';s.textContent=t;pills.append(s)});
+  add('TOPIC',pills);
+  const box=document.createElement('div');
+  if(cur.terms.length){cur.terms.forEach(([k,v])=>{const d=document.createElement('div');d.className='term';const b=document.createElement('b');b.textContent=k+': ';d.append(b,v);box.append(d)})}
+  else{box.className='none';box.textContent='No cheat-sheet entry for this one — build your own concrete example and add it to your notes.'}
+  add('KEY POINTS FROM YOUR CHEAT SHEET',box);
+  if(cur.sdft){const p=document.createElement('div');p.className='term';p.textContent=cur.sdft;add('SDFT HINT',p)}
+  const m=document.createElement('div');m.className='mark';
+  [['ok','✓ Nailed it'],['rv','↻ Revisit']].forEach(([k,l])=>{const b=document.createElement('button');b.className='btn '+k+(st.marks[cur.id]===k?' on':'');b.textContent=l;
+    b.onclick=()=>{st.marks[cur.id]=st.marks[cur.id]===k?undefined:k;if(!st.marks[cur.id])delete st.marks[cur.id];save();renderRev();renderChips()};m.append(b)});
+  r.append(m);
+}
+function reveal(){if(!cur){toast('Pick a question first');return}$('#rev').classList.toggle('on')}
+function renderChips(){
+  const c=$('#chips');c.innerHTML='';
+  topics.forEach(t=>{
+    const all=DATA.filter(d=>d.topic===t),ok=all.filter(d=>st.marks[d.id]==='ok').length;
+    const b=document.createElement('button');b.className='chip'+(st.off.includes(t)?' off':'');
+    b.innerHTML='<span></span><small></small><div class="bar"><i></i></div>';
+    b.children[0].textContent=t;b.children[1].textContent=ok+' / '+all.length+' nailed';
+    b.querySelector('i').style.width=(ok/all.length*100)+'%';
+    b.title='Click to include / exclude this topic';
+    b.onclick=()=>{st.off=st.off.includes(t)?st.off.filter(x=>x!==t):[...st.off,t];save();renderChips();renderTopicSet()};
+    c.append(b)});
+}
+const openAcc=new Set();
+function renderList(){
+  const f=$('#search').value.trim().toLowerCase(),l=$('#list');l.innerHTML='';
+  topics.forEach(tp=>{
+    const all=DATA.filter(d=>d.topic===tp);
+    const hit=all.filter(d=>!f||(d.q+' '+d.topic+' '+d.cat).toLowerCase().includes(f));
+    if(!hit.length)return;
+    const ok=all.filter(d=>st.marks[d.id]==='ok').length;
+    const isOpen=f?true:openAcc.has(tp);
+    const a=document.createElement('div');a.className='acc'+(isOpen?' open':'');
+    const h=document.createElement('button');
+    const nm=document.createElement('span');nm.textContent=tp;
+    const mt=document.createElement('span');mt.className='meta';
+    mt.textContent=(f?hit.length+' match · ':ok+' nailed · ')+all.length;
+    const car=document.createElement('span');car.className='car';car.textContent='›';mt.append(car);
+    h.append(nm,mt);
+    h.onclick=()=>{openAcc.has(tp)?openAcc.delete(tp):openAcc.add(tp);a.classList.toggle('open',f?true:openAcc.has(tp))};
+    const body=document.createElement('div');body.className='body';
+    hit.forEach(d=>{
+      const e=document.createElement('div');e.className='li';
+      const n=document.createElement('span');n.className='n';n.textContent=d.id+'.';
+      const dot=document.createElement('span');dot.className='dot '+(st.marks[d.id]||'');
+      const w=document.createElement('div');
+      const q=document.createElement('div');q.textContent=d.q;
+      const g=document.createElement('div');g.className='t';g.textContent=d.cat==='Polish'?'Polish':'Learn';
+      w.append(q,g);e.append(n,dot,w);
+      e.onclick=()=>{show(d);close();window.scrollTo({top:0,behavior:'smooth'})};
+      body.append(e)});
+    a.append(h,body);l.append(a)});
+  if(!l.children.length){l.innerHTML='<div class="none" style="padding:16px">No matches.</div>'}
+}
+function renderTopicSet(){
+  const w=$('#topicSet');w.innerHTML='';
+  topics.forEach(t=>{const l=document.createElement('label');l.className='s';const i=document.createElement('input');i.type='checkbox';i.checked=!st.off.includes(t);
+    i.onchange=()=>{st.off=i.checked?st.off.filter(x=>x!==t):[...st.off,t];save();renderChips()};
+    l.append(i,t);w.append(l)});
+}
+const open=id=>$(id).classList.add('on');
+const close=()=>document.querySelectorAll('.modal').forEach(m=>m.classList.remove('on'));
+['#bAll','#bAll2'].forEach(b=>$(b).onclick=()=>{renderList();open('#mAll');$('#search').focus()});
+$('#bSet').onclick=()=>{renderTopicSet();open('#mSet')};
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=close);
+document.querySelectorAll('.modal').forEach(m=>m.onclick=e=>{if(e.target===m)close()});
+$('#search').oninput=renderList;
+$('#noRep').checked=st.noRep;$('#skipOk').checked=st.skipOk;
+$('#noRep').onchange=e=>{st.noRep=e.target.checked;save()};
+$('#skipOk').onchange=e=>{st.skipOk=e.target.checked;save()};
+$('#bResetSeen').onclick=()=>{st.seen=[];save();toast('Seen list cleared')};
+$('#bResetAll').onclick=()=>{if(confirm('Clear all progress?')){st.seen=[];st.marks={};save();renderChips();toast('Progress cleared')}};
+$('#bPick').onclick=pick;$('#bRev').onclick=reveal;
+
+// 2-minute SDFT timer
+let tid=null,left=120;
+const fmt=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+$('#bTimer').onclick=()=>{
+  const b=$('#bTimer');
+  if(tid){clearInterval(tid);tid=null;left=120;b.textContent='⏱ 2:00';b.classList.remove('warn');return}
+  b.textContent='⏱ '+fmt(left);
+  tid=setInterval(()=>{left--;b.textContent='⏱ '+fmt(Math.max(left,0));b.classList.toggle('warn',left<=20);
+    if(left<=0){clearInterval(tid);tid=null;left=120;toast('Time! Aim for under ~2 minutes.');b.classList.remove('warn');b.textContent='⏱ 2:00'}},1000);
+};
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||document.querySelector('.modal.on')){if(e.key==='Escape')close();return}
+  if(e.key===' '||e.key==='Enter'){e.preventDefault();pick()}
+  if(e.key==='r'||e.key==='R')reveal();
+});
+const fw=$('#fw');Object.entries(FW).forEach(([k,v])=>{const p=document.createElement('p');const b=document.createElement('b');b.textContent=k+' ';p.append(b,v);fw.append(p)});
+renderChips();
+</script>
+</body>
+</html>
